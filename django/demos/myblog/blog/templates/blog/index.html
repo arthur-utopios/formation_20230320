@@ -1,0 +1,27 @@
+{% extends 'base.html' %} 
+
+{% block title %} Ma page d'accueil {% endblock %} 
+
+{% block content %}
+
+<h1>Bienvenue sur mon blog</h1>
+
+<p>Amusez bien à parcourir les articles</p>
+
+<p>{{ prenom }}</p>
+
+{% if villes %}
+
+<ul>
+  {% for ville in villes %}
+  <li>{{ ville|title }}</li>
+  {% endfor %}
+</ul>
+
+{% else %}
+
+<p>Aucune ville</p>
+
+{% endif %}
+
+{% endblock %}
