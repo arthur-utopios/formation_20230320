@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-              <a class="navbar-brand" href="#">My Blog</a>
+              <a class="navbar-brand" href="{% url 'blog:index' %}">My Blog</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -20,7 +20,7 @@
                 <div class="navbar-nav">
                     {# url permet de rediriger vers un url à l'aide de son nom (name) #}
                   <a class="nav-link active" aria-current="page" href="{% url 'blog:index' %}">Home</a>
-                  <a class="nav-link" href="#">blogs</a>
+                  <a class="nav-link" href="{% url 'blog:blogs' %}">blogs</a>
                   <a class="nav-link" href="#">author</a>
                 </div>
               </div>

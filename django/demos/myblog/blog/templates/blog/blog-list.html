@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>blogs</h1>
+
+{% if blogs %}
+
+{% for blog in blogs %}
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ blog }}</h5>
+      <a href="{% url 'blog:blog-detail' blog.id %}" class="btn btn-primary">détail du blog</a>
+    </div>
+  </div>
+
+{% endfor %}
+
+{% else %}
+
+<p> Aucun blog à afficher </p>
+
+{% endif %}
+
+
+{% endblock %}
