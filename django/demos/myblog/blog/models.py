@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -12,6 +13,10 @@ class Blog(models.Model):
 
     class Meta:
         ordering = ["created_at"]
+
+    def get_absolute_url(self):
+        return reverse("blog:blog-detail", kwargs={"id": self.pk})
+    
 
     def __str__(self) -> str:
         return self.name

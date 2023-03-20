@@ -5,4 +5,12 @@
 <h2>{{ blog }}</h2>
 <p> {{blog.author }} </p>
 
+<div>
+    {% for comment in blog.comment %}
+    <p>
+        {{comment}}
+    </p>     
+    {% endfor %}
+</div>
+
 {% endblock %}

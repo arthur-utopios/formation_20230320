@@ -4,6 +4,8 @@
 
 <h1>blogs</h1>
 
+<a class="button" href="{% url 'blog:blog-create' %}">créer un blog</a>
+
 {% if blogs %}
 
 {% for blog in blogs %}
@@ -11,7 +13,7 @@
 <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">{{ blog }}</h5>
-      <a href="{% url 'blog:blog-detail' blog.id %}" class="btn btn-primary">détail du blog</a>
+      <a href="{{ blog.get_absolute_url }}" class="btn btn-primary">détail du blog</a>
     </div>
   </div>
 
