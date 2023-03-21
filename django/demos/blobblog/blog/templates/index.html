@@ -6,9 +6,11 @@
 <p>Bienvenue sur Blog Blog.</p>
 
 
-
+{% load cache %}
+{% cache 180 index %}
 <h2>Patate</h2>
 <p>Ci-dessous une belle photo de patate </p>
+{% endcache %}
 
 <div>
 {% load static %}

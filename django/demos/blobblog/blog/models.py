@@ -43,6 +43,9 @@ class Blog(models.Model):
     # Ajout du trie par défaut des entités
     class Meta:
         ordering = ["-post_date"]
+        indexes = [
+            models.Index(fields=['post_date'])
+        ]
 
     def get_absolute_url(self):
         """

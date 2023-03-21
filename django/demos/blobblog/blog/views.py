@@ -1,7 +1,9 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
 
+from django.core.cache import cache
 from django.views import generic
 from .models import Blog, BlogAuthor, BlogComment
 from django.shortcuts import get_object_or_404
@@ -43,7 +45,19 @@ class BlogListByAuthorView(generic.ListView):
         """
         id = self.kwargs['pk']
         target_author = get_object_or_404(BlogAuthor, pk=id)
-        return Blog.objects.filter(author=target_author)
+        
+        # accès aux blogs dans le cache par sa clé
+        blogs = cache.get('blogs')
+
+        print(blogs, "access to the cache")
+        # blogs = cache.get_or_set('blogs', Blog.objects.filter(author=target_author), 60 * 2)
+
+        if blogs is None:
+            blogs = Blog.objects.filter(author=target_author)
+            print(blogs, "after the request")
+            cache.set('blogs', blogs, 60 * 2)
+        
+        return blogs
 
     def get_context_data(self, **kwargs):
         """
@@ -103,3 +117,8 @@ class BlogCommentCreate(LoginRequiredMixin, CreateView):
         Après validation du formulaire, redirection vers de détail du blog
         """
         return reverse('blog:blog-detail', kwargs={'pk': self.kwargs['pk'], })
+    
+def get_blog_and_author(request, id: int):
+    blog = Blog.objects.select_related('author').get(id=id)
+    print(blog.author)
+    return render(request, 'index.html')
