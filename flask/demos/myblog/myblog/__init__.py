@@ -3,15 +3,18 @@ import click
 from flask import Flask, url_for
 from flask.cli import with_appcontext
 from flask_sqlalchemy import SQLAlchemy
-from . import blog
+from flask_debugtoolbar import DebugToolbarExtension
+
 
 db = SQLAlchemy()
+toolbar = DebugToolbarExtension()
+
 
 # application factory
-def create_app():
+def create_app(config):
     app = Flask(__name__)
 
-    db_url = os.getenv('DATABASE_URL', 'sqlite:///blog.sqlite')
+    db_url = os.getenv('DATABASE_URL', "sqlite:///myblog.db")
 
     # configuration de l'application
     app.config.from_mapping(
@@ -23,11 +26,17 @@ def create_app():
     # initialisation de SqlAlchemy
     db.init_app(app)
 
+    # initialisation de la toolbar
+    toolbar.init_app(app)
+
     # Ajout de la commande d'initialisation de la db à l'app Flask
     app.cli.add_command(init_db_command)
 
+    from myblog import auth, blog
+
     # ajout du blue print du blog
     app.register_blueprint(blog.bp)
+    app.register_blueprint(auth.bp)
 
     return app
 
