@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+    <title>Index</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <nav>
+      <h1>First App</h1>
+
+    </nav>
+    <section class="content">
+        {%if name %}
+        <p>{{ name }}</p>
+        {% else %}
+        <p>bonjour :D</p>
+        {% endif %}
+    </section>
+</html>
