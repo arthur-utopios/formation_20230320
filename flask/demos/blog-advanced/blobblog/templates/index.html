@@ -3,6 +3,11 @@
 {% block title %} index {% endblock %}
 
 {% block content %}
+
+    <div class="mb-2">
+        <a href="{{ url_for('blog.create') }}" class="btn btn-primary">create a post</a>
+    </div>
+
     {% if posts %}
         {% for post in posts %}
             <div class="card" style="width: 18rem;">
@@ -10,8 +15,8 @@
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.content }}</p>
                     <p class="card-text">{{ post.created_at }}</p>
-                    <a href="#" class="card-link">update</a>
-                    <a href="#" class="card-link">delete</a>
+                    <a href="{{ url_for('blog.update', id=post.id) }}" class="card-link">update</a>
+                    <a href="{{ url_for('blog.delete', id=post.id) }}" class="card-link">delete</a>
                 </div>
             </div>
         {% endfor %}
